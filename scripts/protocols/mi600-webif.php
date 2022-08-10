@@ -178,11 +178,23 @@ if ($DEBUG) {
   file_put_contents("$LOGFILE", $SDTE.": P=".$P." P_LAST=".$$LastP." KWHTotal=".$$LastKWHT." NewKWHTDelta=".$NewKWHTDelta." Err=".$ERR."\r\n", FILE_APPEND);
 }  
 
+// connect to e320 
+// Decoding data
+$GtotalString = exec("/usr/local/bin/tasmotaread e320 | grep '\"Power_in\": ' | awk -F ' ' '{print $2}' | tr -d ','");
+if ($GtotalString) {
+    $Gtotal = (float) $GtotalString; 
+    if ($DEBUG) file_put_contents("$LOGFILE", $SDTE." Gtotal=".$Gtotal."\r\n",FILE_APPEND);
+} else {
+    $ERR = "could not read e320";
+    $Gtotal = '';
+}
+
 $INVT= 0; // temperature inverter fixed dummy
 $BOOT = 0; // temperature dc/dc booster fixed dummy
 $I1V = (float) 36; // udc fixed dummy
 $I1P = (float) $P;
 $I1A = (float) round($I1P / $I1V, 2);
+$I2P  = (float) $Gtotal;
 $G1P= (float) $P; // P-AC
 $G1V= (float) 230; // U-AC fixed dummy
 $G1A = (float) round($G1P / $G1V, 2);
