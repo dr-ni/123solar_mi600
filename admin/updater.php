@@ -170,6 +170,29 @@ if (!$error) {
 	}
 }
 
+// Import user styles
+$stylist = array(
+    'default',
+    'bluepanel',
+    'jeanmarc',
+    'mobile'
+);
+
+if (!$error) {
+    $styldir = scandir("$CURDIR/styles/");
+    $cnt     = count($styldir);
+    for ($i = 0; $i < $cnt; $i++) {
+        if (is_dir("$CURDIR/styles/$styldir[$i]/") && !in_array($styldir[$i], array('.','..')) && !in_array($styldir[$i], $stylist)) {
+            if (!xcopy("$CURDIR/styles/$styldir[$i]/", "$SRVDIR/_INSTALL/123solar/styles/$styldir[$i]/", 0644)) {
+                $error = true;
+                $log .= "ERROR: Failed to import styles $styldir[$i]<br>";
+            } else {
+                $log .= "OK: Imported user style $styldir[$i]<br>";
+            }
+        }
+    }
+}
+
 if (!$error) {
 	if (file_exists("$CURDIR/scripts/123solar.pid")) {
 		$pid     = (int) file_get_contents("$CURDIR/scripts/123solar.pid");
@@ -221,7 +244,6 @@ if (!$error) {
 <font color='#228B22'><b>Update completed.</b></font>
 <br><br>$SRVDIR/_INSTALL/123s_backup_" . $d . '_' . $rnd . ".tar.gz is being created. For security reason, move it away from your webserver directory !
 <br><br>If you have graphical issue, force the refresh of your browser cache ( <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>R</kbd> )
-<br><br><u>Side notes:</u> Previous personal modifications weren't imported (eg: styles/)
 <br><br>Please, take also this occasion to update your system.";
 } else {
 	$time_end       = microtime(true);
