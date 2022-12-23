@@ -68,7 +68,14 @@ $KWHTCorrectionFactor = (float) 0; // standard behaviour, no correction needed
 if (!isset($P)) $P = 0;
 if (!isset($$LastP)) $$LastP = (float) 0; // last determined power value for this inverter
 if (!isset($$LastPTS)) $$LastPTS = $Now - $MinSecondsBetweenMeasurements; // last determination time for the power value of this inverter
-if (!isset($$LastKWHT)) $$LastKWHT = (float) 0;  // last KWH-total value of this inverter
+if (!isset($$LastKWHT)) {
+  $$LastKWHT = (float) 0;  // last KWH-total value of this inverter
+  // In case LastKWHT is not properly set (i.e. after an 123solar restart) we try to load the stored value from disk.
+  $StoredTotalKWH = (float) exec("cat ".$LAST_KWHTOTAL_FILE);
+  if ($StoredTotalKWH > $$LastKWHT) {
+    $$LastKWHT = $StoredTotalKWH;
+  }
+}
 
 // the first measurement should be taken immediately, the following ones at the earliest after $MinSecondsBetweenMeasurements seconds
 $SecondsElapsed = ($Now - $$LastPTS);
@@ -185,9 +192,10 @@ if ($GtotalString) {
     $Gtotal = (float) $GtotalString; 
     if ($DEBUG) file_put_contents("$LOGFILE", $SDTE." Gtotal=".$Gtotal."\r\n",FILE_APPEND);
 } else {
-    $ERR = "could not read e320";
-    $Gtotal = '';
+#    $ERR = "could not read e320";
+    $Gtotal = (float) 0;
 }
+
 
 $INVT= 0; // temperature inverter fixed dummy
 $BOOT = 0; // temperature dc/dc booster fixed dummy
