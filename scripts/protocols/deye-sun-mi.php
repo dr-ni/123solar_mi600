@@ -26,7 +26,7 @@
 # All parameters in field 'Communication options' are separated by commas.
 #
 # The source code of program 'deye-logger' wich is needed to query the inverter data for this script is available at 
-# folder '/123solar/misc/tools/deye-logger.zip'. Please see the readme file in the mentioned zip-file.
+# folder '/123solar/misc/tools/deye-logger'. Please see the readme file in the mentioned folder.
 
 if (!defined('checkaccess')) {die('Direct access not permitted');}
 
