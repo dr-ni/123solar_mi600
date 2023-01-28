@@ -11,3 +11,4 @@ clean:
 
 install:
 	cp -f ./deye-logger /usr/bin/deye-logger
+	
