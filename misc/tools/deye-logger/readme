@@ -1,0 +1,65 @@
+*****************************************************************************
+*                                                                           *
+* This program (deye-logger) is needed in connection with 123solar to query *
+* inverter data from Deye micro inverters of the Deye SUNXXXX family via    *
+* encapsulated MODBUS calls for 123solar protocol script dey-sun-mi.php.    *
+*                                                                           *
+*****************************************************************************
+
+To compile this program you need an installed gnu c++ compiler on your system.
+For an easy way of installation you can follow the steps listed below. These 
+steps are based on an raspberry OS system:
+
+1. install the gnu C++ compiler (if not already done)
+  
+   $ sudo apt-get install g++
+  
+2. copy the program source to /usr/local/src/deye-logger
+
+   $ mkdir /usr/local/src/deye-logger
+   $ cd /usr/local/src/deye-logger
+   $ cp ???/123solar/misc/tools/deye-logger/* .
+  
+3. compile the program
+
+   $ make all 
+
+4. if there are no errors, install the programm to /usr/bin
+
+   $ make install
+  
+5. check if the program deye-logger is starting without problems
+
+   $ /usr/bin/deye-logger
+  
+   now you can see all command line parameters on the screen
+   including their description
+  
+6. you need to know the IP-Address of the inverter in your network
+   you have to change the IP 192.168.1.123 in the example below with the
+   inverter IP in you network!
+
+  $ /usr/bin/deye-logger -c 192.168.1.123 -i
+  
+7. If there are no errors shown on the screen now you can see all gathered
+   information of the inverter in a status file /tmp/deye-logger/your_ip.status
+   and on the screen
+
+8. copy the LoggerSerialNumber from the status file or screen into the clipboard.
+   this number should have 10 digits and starts with 41......
+  
+9. go to the 123solar web-if and chose protocol deye-sun-mi for your adapter.
+   than type the literal lsn= and after that literal paste the previosly copied 
+   logger serial into field 'Communication options' in Admin -> Inverter(s) 
+   configuration
+
+If all these steps are done you should now see all possible inverter
+data in the detail screen of 123solar. Please keep in mind that the program
+deye-logger has always to be active in background while 123solar is running.
+You can start the program at system bootup i.e. by an entry in your
+/etc/rc.local script.
+
+the sequence in the file rc.local could look like this:
+
+/usr/bin/deye-logger -c 192.168.1.123 -i
+/usr/bin/curl http://localhost/123solar/scripts/boot123s.php
