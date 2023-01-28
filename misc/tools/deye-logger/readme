@@ -2,7 +2,7 @@
 *                                                                           *
 * This program (deye-logger) is needed in connection with 123solar to query *
 * inverter data from Deye micro inverters of the Deye SUNXXXX family via    *
-* encapsulated MODBUS calls for 123solar protocol script dey-sun-mi.php.    *
+* encapsulated MODBUS calls for 123solar protocol script deye-sun-mi.php.   *
 *                                                                           *
 *****************************************************************************
 
