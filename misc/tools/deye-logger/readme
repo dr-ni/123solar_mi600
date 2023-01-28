@@ -61,5 +61,5 @@ You can start the program at system bootup i.e. by an entry in your
 
 the sequence in the file rc.local could look like this:
 
-/usr/bin/deye-logger -c 192.168.1.123 -i
+/usr/bin/deye-logger -c 192.168.1.123 &
 /usr/bin/curl http://localhost/123solar/scripts/boot123s.php
