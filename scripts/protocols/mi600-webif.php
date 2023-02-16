@@ -139,7 +139,7 @@ if ($Connected) {
         $$LastPTS = $Now;
       }
     }
-  }  
+  } 
   if ($Dt && $P) {
     // total-KWHT value of this inverter has to be updated. 
     $NewKWHTDelta = $P * $Dt * ((1.0 / (60.0 * 60.0)) / 1000.0);
