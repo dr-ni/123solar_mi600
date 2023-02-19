@@ -23,3 +23,5 @@ maybe also neccessary:
 sudo htpasswd -c /var/www/html/123solar/config/.htpasswd admin
 or
 sudo  htpasswd -c /etc/apache2/.htpasswd admin
+In admin inverter(s) select mi600-webif
+In the communication options supply: "mi600-IP username password"
