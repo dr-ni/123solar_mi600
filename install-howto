@@ -18,10 +18,12 @@ sudo nano /etc/apache2/sites-enabled/000-default.conf
       Require valid-user
 </Directory>
 
-browse to //raspbian/123solar and set admin-Account-PW
+Webinterface: localhost/123solar/
+browse to localhost/123solar and set admin-Account-PW
 maybe also neccessary:
 sudo htpasswd -c /var/www/html/123solar/config/.htpasswd admin
 or
 sudo  htpasswd -c /etc/apache2/.htpasswd admin
-In admin inverter(s) select mi600-webif
+
+In wbinterface go to admin inverter(s) select the protocol mi600-webif
 In the communication options supply: "mi600-IP username password"
