@@ -1,5 +1,8 @@
+Install apache and php:
 https://linuxize.com/post/how-to-install-apache-on-raspberry-pi/
-git clone https://github.com/jeanmarc77/123solar.git
+
+Install 123solar:
+git clone https://github.com/dr-ni/123solar_mi600.git
 sudo mv 123solar /var/www/html/123solar
 cd /var/www/html/
 sudo chown -R www-data:www-data 123solar
