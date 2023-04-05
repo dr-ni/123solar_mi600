@@ -81,7 +81,7 @@ backgroundColor: null,
          events: {
             load: function() {
               setInterval(function() {
-			$.getJSON('programs/programday.php', { invtnum: $selectinvt }, function(JSONResponse) {
+			$.getJSON('programs/today.php', { invtnum: $selectinvt }, function(JSONResponse) {
 			Mychartmain.setTitle({text: JSONResponse.title});
 			for (var annotation in Mychartmain.annotations) {
 				Mychartmain.annotations[annotation].destroy();
@@ -560,7 +560,7 @@ Mychart2.showLoading();
 Mychart3 = Highcharts.chart('container3',options3);
 Mychart3.showLoading();
 
-$.getJSON('programs/programday.php', { invtnum: $selectinvt }, function(JSONResponse) {
+$.getJSON('programs/today.php', { invtnum: $selectinvt }, function(JSONResponse) {
 options1.series = JSONResponse.data;
 options1.annotations = JSONResponse.annotations;
 Mychartmain.hideLoading();
