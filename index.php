@@ -120,7 +120,8 @@ loading: {
    style: { backgroundColor: null }
 },
 title: {
-text: '$lgTODAYTITLE (... kWh)'
+text: '$lgTODAYTITLE (... kWh)',
+style: {fontSize: '1em'}
 },
 subtitle: {
 text: '$lgSUNRISE ..... - $lgTRANSIT ..... - $lgSUNSET .....'
@@ -186,7 +187,8 @@ loading: {
    style: { backgroundColor: null }
 },
 title: {
-text: '$lgYESTERDAYTITLE (... kWh)'
+text: '$lgYESTERDAYTITLE (... kWh)',
+style: {fontSize: '1em'}
 },
 credits: {enabled: false},
 legend: {enabled: false},
@@ -225,6 +227,7 @@ annotations: []
 /// Last days prod ///
 var Mychart3, options3 = {
 chart: {
+type: 'column',
 backgroundColor: null,
 defaultSeriesType: 'column'
 },
@@ -245,7 +248,8 @@ loading: {
 },
 credits: {enabled: false},
 title: {
-text: '$lgLASTPRODTITLE'
+text: '$lgLASTPRODTITLE',
+style: {fontSize: '1em'}
 },
 subtitle: {text: '$lgLASTPRODSUBTITLE'},
 xAxis: {
