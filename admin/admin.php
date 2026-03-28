@@ -144,7 +144,7 @@ if ($startstop == 'start' || $startstop == 'stop') {
 			exec("systemctl is-enabled 123solar.service",$output);
 			if (is_dir('/run/systemd/system') && ($output[0] == "enabled")) {
 				exec("$PSCMD | grep $PID | grep 123solar.php", $ret);
-				if (!isset($ret[1])) { // avoid several instances
+				if (!isset($ret[0])) { // avoid several instances
 				$command = exec("sudo systemctl start 123solar.service");
 				}
 			} else {
