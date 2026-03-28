@@ -202,7 +202,7 @@ if ($startstop == 'start' || $startstop == 'stop') {
   document.getElementById('messageSpan').innerHTML = \"...Please wait...<br><img src=\'../images/loading.gif\'>\";
   setTimeout(function () {
     window.location.href = 'admin.php?startstop=done';
-  }, 1000);
+  }, 4000);
 </script>
 ";
 }
