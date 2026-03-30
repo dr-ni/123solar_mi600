@@ -119,8 +119,6 @@ if (file_exists('../scripts/123solar.pid')) {
 	$PID = (int) file_get_contents('../scripts/123solar.pid');
 	exec("$PSCMD | grep $PID | grep 123solar.php", $ret);
 	if (!isset($ret[0])) {
-		// FIX: changed $ret[1] to $ret[0] — ps returns one line when process exists,
-		// so $ret[1] (second element) is never set, causing $PID to always be nulled.
 		$PID = null;
 		unlink('../scripts/123solar.pid');
 	}
@@ -145,9 +143,6 @@ if ($startstop == 'start' || $startstop == 'stop') {
 			$output=null;
 			exec("systemctl is-enabled 123solar.service",$output);
 			if (is_dir('/run/systemd/system') && ($output[0] == "enabled")) {
-				// FIX: replaced unreliable ps+PID check with systemctl is-active.
-				// The ps check fails when $PID is empty (service stopped, no pid file)
-				// because "ps | grep ''" matches any process, causing start to be skipped.
 				$svcstate = exec("systemctl is-active 123solar.service");
 				if ($svcstate != "active") {
 					$command = exec("sudo systemctl start 123solar.service");
