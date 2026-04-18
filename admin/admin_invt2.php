@@ -55,7 +55,7 @@ if (!empty($_POST['CORRECTFACTORx']) && is_numeric($_POST['CORRECTFACTORx'])) {
 } else {
 	$CORRECTFACTORx = 1;
 }
-if (!empty($_POST['PASSOx'])) {
+if (!empty($_POST['PASSOx']) && is_numeric($_POST['PASSOx'])) {
 	$PASSOx = $_POST['PASSOx'];
 } else {
 	$PASSOx = 0;
@@ -299,7 +299,7 @@ if (!empty($_POST['bntsubmit'])) {
  * @return unknown
  */
 function testemail($adress) {
-	$Syntaxe = '#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#';
+	$Syntaxe = '#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,12}$#';
 	if (preg_match($Syntaxe, $adress) || $adress == '')
 		return true;
 	else
@@ -484,7 +484,7 @@ if ($bntsubmit == 'Test mail') {
 
 	if ($Err != true) {
 		include "../config/config_invt" . $invt_numx . ".php";
-		if (${'PROTOCOL' . $invt_numx} != $PROTOCOLx) { // Clearing options
+		if ("{${'PROTOCOL' . $invt_numx}}" != $PROTOCOLx) { // Clearing options
 			$COMOPTIONx = '';
 		}
 

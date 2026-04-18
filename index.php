@@ -49,6 +49,7 @@ $(document).ready(function()
 {
 Highcharts.setOptions({
 global: {useUTC: true},
+accessibility:{enabled:false},
 lang: {
 thousandsSep: '$THSEP',
 decimalPoint: '$DPOINT',

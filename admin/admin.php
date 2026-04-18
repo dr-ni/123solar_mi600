@@ -118,7 +118,7 @@ if (file_exists('../scripts/123solar.pid')) {
 	$PIDd = date("$DATEFORMAT H:i:s", filemtime('../scripts/123solar.pid'));
 	$PID = (int) file_get_contents('../scripts/123solar.pid');
 	exec("$PSCMD | grep $PID | grep 123solar.php", $ret);
-	if (!isset($ret[1])) {
+	if (!isset($ret[0])) {
 		$PID = null;
 		unlink('../scripts/123solar.pid');
 	}
@@ -143,9 +143,9 @@ if ($startstop == 'start' || $startstop == 'stop') {
 			$output=null;
 			exec("systemctl is-enabled 123solar.service",$output);
 			if (is_dir('/run/systemd/system') && ($output[0] == "enabled")) {
-				exec("$PSCMD | grep $PID | grep 123solar.php", $ret);
-				if (!isset($ret[1])) { // avoid several instances
-				$command = exec("sudo systemctl start 123solar.service");
+				$svcstate = exec("systemctl is-active 123solar.service");
+				if ($svcstate != "active") {
+					$command = exec("sudo systemctl start 123solar.service");
 				}
 			} else {
 				$command = 'php ../scripts/123solar.php' . ' > /dev/null 2>&1 & echo $!;';
@@ -201,8 +201,8 @@ if ($startstop == 'start' || $startstop == 'stop') {
 <script type='text/javascript'>
   document.getElementById('messageSpan').innerHTML = \"...Please wait...<br><img src=\'../images/loading.gif\'>\";
   setTimeout(function () {
-    window.location.href = 'admin.php?startstop=done';
-  }, 1000);
+    window.location.href = 'admin.php?';
+  }, 4000);
 </script>
 ";
 }
